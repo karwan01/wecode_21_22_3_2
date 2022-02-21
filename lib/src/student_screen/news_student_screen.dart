@@ -7,7 +7,8 @@ import 'package:wecode_2021/src/services/auth_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NewsStudentScreen extends StatefulWidget {
-  const NewsStudentScreen({Key? key, required this.generalUser}) : super(key: key);
+  const NewsStudentScreen({Key? key, required this.generalUser})
+      : super(key: key);
   final GeneralUser? generalUser;
 
   @override
@@ -33,11 +34,9 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
         ? Container()
         : Scaffold(
             appBar: AppBar(
-              title: Text('Student News'),
+              title: Text('Student'),
               centerTitle: true,
               backgroundColor: Colors.deepPurple[400],
-
-              
             ),
             body: widget.generalUser == null
                 ? Container(child: Text('You are not authorised'))
@@ -62,6 +61,8 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
                                         : Container(
                                             color: Colors.grey,
                                             child: CachedNetworkImage(
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
                                               imageUrl:
                                                   widget.generalUser!.imgUrl!,
                                               placeholder: (context, url) =>
@@ -76,12 +77,14 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
                                       right: 0,
                                       left: 0,
                                       child: Container(
-                                        padding: EdgeInsets.all(8),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 3, vertical: 6),
                                         child: Text(
                                           'Looking for a job',
                                           textAlign: TextAlign.center,
+                                          style: TextStyle(color: Colors.white),
                                         ),
-                                        color: Colors.blue,
+                                        color: Theme.of(context).primaryColor,
                                       ),
                                     ),
                                   ],
@@ -155,12 +158,32 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
                         child: Container(
                           child: SafeArea(
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 _generalBoxButton(
-                                    icon: Icon(
-                                  FontAwesomeIcons.linkedin,
-                                  color: Colors.blue,
-                                ))
+                                  icon: Icon(
+                                    FontAwesomeIcons.linkedin,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                _generalBoxButton(
+                                  icon: Icon(
+                                    FontAwesomeIcons.stackOverflow,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                _generalBoxButton(
+                                  icon: Icon(
+                                    FontAwesomeIcons.github,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                _generalBoxButton(
+                                  icon: Icon(
+                                    FontAwesomeIcons.instagram,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -184,15 +207,17 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
 
 // _general button will recive a label  and checks if it can launch a url
   Widget _urlLauncherButton(
-      {required String url,
-      required String label,
-      Color? color = Colors.blue}) {
+      {required String url, required String label, Color? color}) {
     return Container(
         height: 50,
         margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
         child: ElevatedButton(
-          child: Text(label),
-          style: ElevatedButton.styleFrom(primary: color),
+          child: Text(
+            label,
+            style: TextStyle(fontSize: 18),
+          ),
+          style:
+              ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
           onPressed: () async {
             await canLaunch(url) == true
                 ? launch(url)
@@ -208,7 +233,9 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
         height: 50,
         margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
         child: ElevatedButton(
-          child: Text(label),
+          child: Text(
+            label,
+          ),
           style: ElevatedButton.styleFrom(primary: color),
           onPressed: onPressed,
         ));
@@ -218,7 +245,7 @@ class _NewsStudentScreenState extends State<NewsStudentScreen> {
       {required Icon icon, Color? color = Colors.blue, onPressed}) {
     return Container(
       height: 50,
-      margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
+      margin: EdgeInsets.only(right: 10, left: 10, bottom: 10),
       child: IconButton(
         icon: icon,
         iconSize: 42,

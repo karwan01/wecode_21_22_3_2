@@ -25,16 +25,16 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: Colors.red,
+          primaryColor: Color.fromRGBO(126, 87, 194, 1),
           textTheme: TextTheme(
               bodyText1: TextStyle(
             fontSize: 18,
           )),
           appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.red,
+            backgroundColor: Color.fromRGBO(126, 87, 194, 1),
           )),
       // theme: ThemeData.dark(),
-      initialRoute: '/',
+      initialRoute: '/studentLinktreeView',
       // initialRoute: '/trainersScreen',
       routes: {
         '/': (context) => AuthHandler(), //this has to be the Auth handler
@@ -44,6 +44,7 @@ class AppView extends StatelessWidget {
         '/trainersScreen': (context) => TrainersScreenView(),
         '/privacyPolicyScreen': (context) => const PrivacyPolicyScreen(),
         '/studentDashboard': (context) => StudentDashboard(),
+        '/studentLinktreeView': (context) => StudentLinktreeView(),
       },
     );
   }
